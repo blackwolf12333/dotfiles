@@ -1,0 +1,5 @@
+[user]
+	name = Peter Maatman
+	email = blackwolf12333@gmail.com
+[credential]
+	helper = cache --timeout=3600
