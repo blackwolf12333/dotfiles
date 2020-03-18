@@ -205,4 +205,17 @@ call plug#end()
 let g:lightline = {
 	\ 'colorscheme': 'base16_atelier_dune',
 	\ }
+
 colorscheme base16-default-dark
+
+function! s:base16_customize() abort
+  call Base16hi("Comment", g:base16_gui08, g:base16_gui00, g:base16_cterm05, g:base16_cterm03, "bold", "")
+endfunction
+
+augroup on_change_colorschema
+  autocmd!
+  autocmd ColorScheme * call s:base16_customize()
+augroup END
+
+colorscheme base16-default-dark
+
