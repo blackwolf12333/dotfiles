@@ -92,22 +92,6 @@ augroup filetype_rust
     autocmd BufReadPost *.rs setlocal filetype=rust
 augroup END
 
-" " I removed the noselect option here because I want it to automatically
-" " select the first available option
-" set completeopt=noinsert,menuone
-
-" " I removed the <cr> after <c-y> because that would insert an additional
-" " newline when not using the noselect option in completeopt
-" inoremap <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
-" " Use <TAB> to select the popup menu:
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-
-" inoremap <silent><c-SPACE> :call LanguageClient#contextMenu()<cr>
-
-" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-" nnoremap <silent> <S-F6> :call LanguageClient#textDocument_rename()<CR>
-
 " CoC config
 
 " Use tab for trigger completion with characters ahead and navigate.
