@@ -40,6 +40,10 @@ set mousemodel=popup
 " visual indicator for column width
 set colorcolumn=80
 
+" Clipboard
+noremap <Leader>y "+y
+noremap <Leader>p "+p
+
 let g:netrw_banner = 0
 let g:netwr_brows_split = 2
 
@@ -76,15 +80,6 @@ let g:ctrlp_custom_ignore = {
 
 let g:python3_host_prog='/usr/bin/python3'
 
-" language client config
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-	\ 'php': ['php', '/usr/bin/php-language-server'],
-    \ 'python': ['/usr/local/bin/pyls'],
-    \ }
-
-let g:LanguageClient_useFloatingHover=1
-
 " Required for operations modifying multiple buffers like rename.
 
 augroup filetype_rust
@@ -93,20 +88,6 @@ augroup filetype_rust
 augroup END
 
 " CoC config
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
