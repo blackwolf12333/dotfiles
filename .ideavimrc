@@ -1,0 +1,7 @@
+source ~/.vimrc
+set easymotion
+
+:map <leader>gd :action GotoDeclaration<CR>
+:map <leader>r :action ReformatCode <CR>
+:map <leader>l :action NextEditorTab<CR>
+:map <leader>h :action PreviousEditorTab<CR>
