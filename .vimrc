@@ -2,8 +2,7 @@
 set shell=/bin/bash
 let mapleader=","
 
-set nu rnu
-
+set nu rnu 
 syntax on
 
 set shiftwidth=4
@@ -40,6 +39,9 @@ set mousemodel=popup
 " visual indicator for column width
 set colorcolumn=80
 
+" Allow saving through <leader>w
+nnoremap <Leader>w w
+
 " Clipboard
 noremap <Leader>y "+y
 noremap <Leader>p "+p
@@ -55,6 +57,10 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Add shortcut move keys
+nnoremap <S-J> 10j
+nnoremap <S-K> 10k
+
 set splitbelow
 set splitright
 
@@ -65,11 +71,17 @@ set undofile
 set background=dark
 set termguicolors
 
+if has('ideavim')
+	set commentary
+endif
+
+if !has('ideavim')
+
 " CtrlP setup
-let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_cmd = 'CtrlPMRU'
 let g:ctrlp_working_path_mode = 'ra'
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*/tmp/*,*/target/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
@@ -104,7 +116,7 @@ else
 endif
 
 " press tab to jump to the end of the line after completion
-inoremap <Tab> <esc>%%a
+" inoremap <Tab> <esc>%%a
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -116,7 +128,7 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <C-LeftMouse> <LeftMouse> <Plug>(coc-definition)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> H :call <SID>show_documentation()<CR>
 
 " Use Intellij keybind for rename action
 nnoremap <silent> <S-F6> <Plug>(coc-rename)
@@ -155,12 +167,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-"Plug 'autozimu/LanguageClient-neovim', {
-"    \ 'branch': 'next',
-"    \ 'do': 'bash install.sh',
-"    \ }
-Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
-
 Plug 'junegunn/fzf'
 
 Plug 'chriskempson/base16-vim'
@@ -184,3 +190,4 @@ augroup END
 
 colorscheme base16-default-dark
 
+endif " not has ideavim
