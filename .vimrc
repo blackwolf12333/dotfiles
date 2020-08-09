@@ -67,6 +67,13 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap <S-J> 10j
 nnoremap <S-K> 10k
 
+" incsearch mappings and highlighting config
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map / <Plug>(incsearch-forward)
+map ? <Plug>(incsearch-backward)
+map n <Plug>(incsearch-nohl-n)
+
 set splitbelow
 set splitright
 
@@ -162,6 +169,9 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-vinegar'
+
+Plug 'haya14busa/incsearch.vim'
+Plug 'easymotion/vim-easymotion'
 
 Plug 'christoomey/vim-tmux-navigator'
 
