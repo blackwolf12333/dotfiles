@@ -39,6 +39,12 @@ set mousemodel=popup
 " visual indicator for column width
 set colorcolumn=80
 
+syntax sync fromstart
+
+let g:rust_recommended_style = 0
+let g:rustfmt_autosave_if_config_present = 1
+let g_rustfmt_command = "rustfmt +stable"
+
 " Allow saving through <leader>w
 nnoremap <Leader>w w
 
@@ -164,6 +170,8 @@ Plug 'airblade/vim-rooter'
 
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ctrlpvim/ctrlp.vim'
+
+Plug 'rust-lang/rust.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
