@@ -12,6 +12,8 @@ set cmdheight=1
 set showcmd
 set noshowmode
 
+filetype plugin indent on
+
 " Having longer updatetime (default is 4000ms) leads to noticeable
 " delays and poor user experience according to the coc example config
 set updatetime=300
@@ -77,129 +79,155 @@ set undofile
 set background=dark
 set termguicolors
 
+" See https://ramgo.li/posts/coc.nvim_split_if_not_open/
+" use in coc config for jumpCommand
+function! SplitIfNotOpen(fname)
+	let bufnum=bufnr(expand(a:fname))
+	let winnum=bufwinnr(bufnum)
+	if winnum != -1
+	" Jump to existing split
+	exe winnum . "wincmd w"
+	else
+	" Make new split as usual
+	exe "vsplit " . a:fname
+	endif
+	" Execute the cursor movement command
+	" exe a:call
+endfunction
+
+command! -nargs=+ -complete=file CocSplitIfNotOpen :call SplitIfNotOpen(<f-args>)
+
+
 if has('ideavim')
 	set commentary
 endif
 
 if !has('ideavim')
-map / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
 
-" CtrlP setup
-let g:ctrlp_cmd = 'CtrlPMRU'
-let g:ctrlp_working_path_mode = 'ra'
+	map / <Plug>(easymotion-sn)
+	omap / <Plug>(easymotion-tn)
+	let g:EasyMotion_smartcase = 1
 
-set wildignore+=*/tmp/*,*/target/*,*.so,*.swp,*.zip     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+	" CtrlP setup
+	let g:ctrlp_cmd = 'CtrlPMixed'
+	let g:ctrlp_working_path_mode = 'ra'
 
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ }
+	set wildignore+=*/tmp/*,*/target/*,*.so,*.swp,*.zip     " MacOSX/Linux
+	set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
-let g:python3_host_prog='/usr/bin/python3'
+	let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+	let g:ctrlp_custom_ignore = {
+	  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+	  \ 'file': '\v\.(exe|so|dll)$',
+	  \ }
 
-" Required for operations modifying multiple buffers like rename.
+	let g:python3_host_prog='/usr/bin/python3'
 
-augroup filetype_rust
-    autocmd!
-    autocmd BufReadPost *.rs setlocal filetype=rust
-augroup END
+	" Required for operations modifying multiple buffers like rename.
 
-" CoC config
+	augroup filetype_rust
+		autocmd!
+		autocmd BufReadPost *.rs setlocal filetype=rust
+	augroup END
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-" disable ctrl-space in normal mode
-nnoremap <c-space>
+	" CoC config
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-if has('patch8.1.1068')
-  " Use `complete_info` if your (Neo)Vim version supports it.
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
+	" Use <c-space> to trigger completion.
+	inoremap <silent><expr> <c-space> coc#refresh()
+	" disable ctrl-space in normal mode
+	nnoremap <c-space> :CocCommand actions.open<CR>
 
-" press tab to jump to the end of the line after completion
-" inoremap <Tab> <esc>%%a
+	" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+	" position. Coc only does snippet and additional edit on confirm.
+	if has('patch8.1.1068')
+	  " Use `complete_info` if your (Neo)Vim version supports it.
+	  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+	else
+	  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+	endif
 
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+	" press tab to jump to the end of the line after completion
+	" inoremap <Tab> <esc>%%a
 
-" Goto navigation using left mouse click like in Intellij
-nmap <C-LeftMouse> <LeftMouse> <Plug>(coc-definition)
+	" GoTo code navigation.
+	nmap <silent> gd <Plug>(coc-definition)
+	nmap <silent> gy <Plug>(coc-type-definition)
+	nmap <silent> gi <Plug>(coc-implementation)
+	nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window.
-nnoremap <silent> H :call <SID>show_documentation()<CR>
+	" Goto navigation using left mouse click like in Intellij
+	nmap <C-LeftMouse> <LeftMouse> <Plug>(coc-definition)
 
-" Use Intellij keybind for rename action
-nnoremap <silent> <S-F6> <Plug>(coc-rename)
+	" Use K to show documentation in preview window.
+	nnoremap <silent> H :call <SID>show_documentation()<CR>
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+	" Use Intellij keybind for rename action
+	nmap <silent> <S-F6> <Plug>(coc-rename)
 
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+	function! s:show_documentation()
+	  if (index(['vim','help'], &filetype) >= 0)
+		execute 'h '.expand('<cword>')
+	  else
+		call CocAction('doHover')
+	  endif
+	endfunction
 
-call plug#begin('~/.local/share/nvim/plugged')
+	" Apply AutoFix to problem on the current line.
+	nmap <leader>qf  <Plug>(coc-fix-current)
 
-Plug 'itchyny/lightline.vim'
-Plug 'mike-hearn/base16-vim-lightline'
+	" format file
+	nmap <leader>f <Plug>(coc-format)
 
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-git'
-Plug 'tpope/vim-vinegar'
+	call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'easymotion/vim-easymotion'
+	Plug 'itchyny/lightline.vim'
+	Plug 'mike-hearn/base16-vim-lightline'
 
-Plug 'christoomey/vim-tmux-navigator'
+	Plug 'tpope/vim-commentary'
+	Plug 'tpope/vim-sensible'
+	Plug 'tpope/vim-surround'
+	Plug 'tpope/vim-repeat'
+	Plug 'tpope/vim-fugitive'
+	Plug 'tpope/vim-git'
+	Plug 'tpope/vim-vinegar'
+
+	Plug 'easymotion/vim-easymotion'
+
+	Plug 'christoomey/vim-tmux-navigator'
 
 
-Plug 'airblade/vim-rooter'
+	Plug 'airblade/vim-rooter'
 
-Plug 'editorconfig/editorconfig-vim'
-Plug 'ctrlpvim/ctrlp.vim'
+	Plug 'editorconfig/editorconfig-vim'
+	Plug 'ctrlpvim/ctrlp.vim'
 
-Plug 'rust-lang/rust.vim'
+	Plug 'rust-lang/rust.vim'
+	Plug 'ElmCast/elm-vim'
+    Plug 'neovimhaskell/haskell-vim'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-Plug 'junegunn/fzf'
+	Plug 'junegunn/fzf'
 
-Plug 'chriskempson/base16-vim'
+	Plug 'chriskempson/base16-vim'
 
-call plug#end()
+	call plug#end()
 
-let g:lightline = {
-	\ 'colorscheme': 'base16_atelier_dune',
-	\ }
+	let g:lightline = {
+		\ 'colorscheme': 'base16_atelier_dune',
+		\ }
 
-colorscheme base16-default-dark
+	colorscheme base16-default-dark
 
-function! s:base16_customize() abort
-  call Base16hi("Comment", g:base16_gui08, g:base16_gui00, g:base16_cterm05, g:base16_cterm03, "bold", "")
-endfunction
+	function! s:base16_customize() abort
+	  call Base16hi("Comment", g:base16_gui08, g:base16_gui00, g:base16_cterm05, g:base16_cterm03, "bold", "")
+	endfunction
 
-augroup on_change_colorschema
-  autocmd!
-  autocmd ColorScheme * call s:base16_customize()
-augroup END
+	augroup on_change_colorschema
+	  autocmd!
+	  autocmd ColorScheme * call s:base16_customize()
+	augroup END
 
-colorscheme base16-default-dark
+	colorscheme base16-default-dark
 
 endif " not has ideavim
