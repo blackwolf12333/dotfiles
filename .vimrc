@@ -199,7 +199,7 @@ if !has('ideavim')
 	Plug 'airblade/vim-rooter'
 
 	Plug 'editorconfig/editorconfig-vim'
-	Plug 'dyng/ctrlsf.vim'
+	Plug 'blackwolf12333/ctrlsf.vim'
 
 	Plug 'rust-lang/rust.vim'
 	Plug 'ElmCast/elm-vim'
