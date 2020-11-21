@@ -12,6 +12,8 @@ set cmdheight=1
 set showcmd
 set noshowmode
 
+set nowrap
+
 filetype plugin indent on
 
 " Having longer updatetime (default is 4000ms) leads to noticeable
@@ -103,25 +105,22 @@ if has('ideavim')
 endif
 
 if !has('ideavim')
+	nmap <C-p> <Plug>CtrlSFPrompt
+	let g:ctrlsf_auto_focus = {
+				\  "at": "start"
+				\}
+	let g:ctrlsf_auto_preview = 1
+	let g:ctrlsf_default_view_mode = 'compact'
+	let g:ctrlsf_backend = 'ag'
+	let g:ctrlsf_winsize = '20%'
+	let g:ctrlsf_auto_close = {
+        \ "normal" : 1,
+        \ "compact": 1
+        \ }
 
 	map / <Plug>(easymotion-sn)
 	omap / <Plug>(easymotion-tn)
 	let g:EasyMotion_smartcase = 1
-
-	" CtrlP setup
-	let g:ctrlp_cmd = 'CtrlPMixed'
-	let g:ctrlp_working_path_mode = 'ra'
-
-	set wildignore+=*/tmp/*,*/target/*,*.so,*.swp,*.zip     " MacOSX/Linux
-	set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-
-	let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-	let g:ctrlp_custom_ignore = {
-	  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-	  \ 'file': '\v\.(exe|so|dll)$',
-	  \ }
-
-	let g:python3_host_prog='/usr/bin/python3'
 
 	" Required for operations modifying multiple buffers like rename.
 
