@@ -134,7 +134,8 @@ if !has('ideavim')
 	" Use <c-space> to trigger completion.
 	inoremap <silent><expr> <c-space> coc#refresh()
 	" disable ctrl-space in normal mode
-	nnoremap <c-space> :CocCommand actions.open<CR>
+	nmap <c-space> <Plug>(coc-codeaction)
+	vmap <c-space> <Plug>(coc-codeaction-selected)
 
 	" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 	" position. Coc only does snippet and additional edit on confirm.
@@ -176,6 +177,7 @@ if !has('ideavim')
 
 	" format file
 	nmap <leader>f <Plug>(coc-format)
+	vmap <leader>f <Plug>(coc-format-selected)
 
 	call plug#begin('~/.local/share/nvim/plugged')
 
