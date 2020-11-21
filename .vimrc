@@ -190,7 +190,6 @@ if !has('ideavim')
 	Plug 'tpope/vim-repeat'
 	Plug 'tpope/vim-fugitive'
 	Plug 'tpope/vim-git'
-	Plug 'tpope/vim-vinegar'
 
 	Plug 'easymotion/vim-easymotion'
 
@@ -200,7 +199,7 @@ if !has('ideavim')
 	Plug 'airblade/vim-rooter'
 
 	Plug 'editorconfig/editorconfig-vim'
-	Plug 'ctrlpvim/ctrlp.vim'
+	Plug 'dyng/ctrlsf.vim'
 
 	Plug 'rust-lang/rust.vim'
 	Plug 'ElmCast/elm-vim'
