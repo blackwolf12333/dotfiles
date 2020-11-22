@@ -49,9 +49,6 @@ let g:rust_recommended_style = 0
 let g:rustfmt_autosave_if_config_present = 1
 let g_rustfmt_command = "rustfmt +stable"
 
-" Allow saving through <leader>w
-nnoremap <Leader>w w
-
 " Clipboard
 noremap <Leader>y "+y
 noremap <Leader>p "+p
@@ -61,11 +58,26 @@ let g:netwr_brows_split = 2
 
 nnoremap Q <Nop>
 
-" splitting controls
+" split window movement controls
+" in combination with vim-tmux-navigator this allows moving
+" between vim windows and tmux screens
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" easier tab navigation. This is useful when I already have 3 splits
+" and want to open another (with for instance coc-definition) file in a new
+" tab. This allows me to easily move between the tabs
+nnoremap <silent> <A-l> :tabnext<CR>
+nnoremap <silent> <A-h> :tabprevious<CR>
+
+" simple mapping to do split resizing
+nnoremap <silent> <A-a> :vertical resize +5<CR>
+nnoremap <silent> <A-d> :vertical resize -5<CR>
+nnoremap <silent> <A-s> :resize -5<CR>
+nnoremap <silent> <A-w> :resize +5<CR>
+nnoremap <silent> <A-=> <C-w>=
 
 " Add shortcut move keys
 nnoremap <S-J> 10j
@@ -80,25 +92,6 @@ set undofile
 " Colors
 set background=dark
 set termguicolors
-
-" See https://ramgo.li/posts/coc.nvim_split_if_not_open/
-" use in coc config for jumpCommand
-function! SplitIfNotOpen(fname)
-	let bufnum=bufnr(expand(a:fname))
-	let winnum=bufwinnr(bufnum)
-	if winnum != -1
-	" Jump to existing split
-	exe winnum . "wincmd w"
-	else
-	" Make new split as usual
-	exe "vsplit " . a:fname
-	endif
-	" Execute the cursor movement command
-	" exe a:call
-endfunction
-
-command! -nargs=+ -complete=file CocSplitIfNotOpen :call SplitIfNotOpen(<f-args>)
-
 
 if has('ideavim')
 	set commentary
