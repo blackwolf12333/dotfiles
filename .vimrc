@@ -5,15 +5,13 @@ let mapleader=","
 set nu rnu 
 syntax on
 
-set shiftwidth=4
-set tabstop=4
-
 set cmdheight=1
 set showcmd
 set noshowmode
 
 set nowrap
 
+" Other indentation stuff is detected by vim-sleuth plugin
 filetype plugin indent on
 
 " Having longer updatetime (default is 4000ms) leads to noticeable
@@ -116,7 +114,6 @@ if !has('ideavim')
 	let g:EasyMotion_smartcase = 1
 
 	" Required for operations modifying multiple buffers like rename.
-
 	augroup filetype_rust
 		autocmd!
 		autocmd BufReadPost *.rs setlocal filetype=rust
@@ -183,6 +180,7 @@ if !has('ideavim')
 	Plug 'tpope/vim-repeat'
 	Plug 'tpope/vim-fugitive'
 	Plug 'tpope/vim-git'
+	Plug 'tpope/vim-sleuth'
 
 	Plug 'easymotion/vim-easymotion'
 
