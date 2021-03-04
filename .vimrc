@@ -10,6 +10,7 @@ set showcmd
 set noshowmode
 
 set nowrap
+set whichwrap=<,>,l,h
 
 " Other indentation stuff is detected by vim-sleuth plugin
 filetype plugin indent on
