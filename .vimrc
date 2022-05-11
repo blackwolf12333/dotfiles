@@ -170,6 +170,8 @@ if !has('ideavim')
 	nmap <leader>f <Plug>(coc-format)
 	vmap <leader>f <Plug>(coc-format-selected)
 
+	nmap <leader>a <Plug>(coc-codelens-action)
+
 	call plug#begin('~/.local/share/nvim/plugged')
 
 	Plug 'itchyny/lightline.vim'
