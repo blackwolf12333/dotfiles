@@ -10,3 +10,8 @@
 	rebase = true
 [alias]
 	recent = for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname)' refs/heads
+	co = checkout
+	last = log --no-merges master..
+	fixup = commit --fixup
+[commit]
+	verbose = true
