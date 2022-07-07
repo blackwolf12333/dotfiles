@@ -13,5 +13,10 @@
 	co = checkout
 	last = log --no-merges master..
 	fixup = commit --fixup
+	amend = commit --amend
 [commit]
 	verbose = true
+[push]
+	autoSetupRemote = true
+[rebase]
+	autoSquash = true
