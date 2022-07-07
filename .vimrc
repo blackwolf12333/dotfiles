@@ -92,11 +92,11 @@ set undofile
 set background=dark
 set termguicolors
 
-if has('ideavim')
+if has('ide')
 	set commentary
 endif
 
-if !has('ideavim')
+if !has('ide')
 	nmap <C-p> <Plug>CtrlSFPrompt
 	let g:ctrlsf_auto_focus = {
 				\  "at": "start"
