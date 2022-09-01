@@ -205,6 +205,8 @@ if !has('ide')
 
 	Plug 'chriskempson/base16-vim'
 
+	Plug 'wellle/context.vim'
+
 	call plug#end()
 
 	let g:lightline = {
