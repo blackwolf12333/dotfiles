@@ -14,6 +14,7 @@
 	last = log --no-merges master..
 	fixup = commit --fixup
 	amend = commit --amend
+	cp = cherry-pick 
 [commit]
 	verbose = true
 [push]
