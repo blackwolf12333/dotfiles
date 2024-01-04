@@ -1,0 +1,9 @@
+[shell]
+args = ["--login", "-C tmux new-session -A"]
+program = "/bin/fish"
+
+[window]
+decorations = "none"
+# this used to be Maximized but due to https://gitlab.gnome.org/GNOME/mutter/-/issues/3229
+# that's no longer working
+startup_mode = "Windowed"
