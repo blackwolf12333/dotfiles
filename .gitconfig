@@ -15,6 +15,9 @@
 	fixup = commit --fixup
 	amend = commit --amend
 	cp = cherry-pick 
+	p = push --force-with-lease
+	wip = commit -a -m "wip"
+	unwip = reset HEAD~1
 [commit]
 	verbose = true
 [push]
