@@ -1,5 +1,4 @@
 [shell]
-args = ["--login", "-C tmux new-session -A"]
 program = "/bin/fish"
 
 [window]
