@@ -1,6 +1,6 @@
 "dsf Fish doesn't play nice with things
 set shell=/bin/bash
-let mapleader=","
+let maplocalleader=","
 
 set nu rnu 
 syntax on
@@ -192,7 +192,7 @@ if !has('ide')
 
 	Plug 'rust-lang/rust.vim'
 	Plug 'ElmCast/elm-vim'
-    Plug 'neovimhaskell/haskell-vim'
+	Plug 'neovimhaskell/haskell-vim'
 
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -201,6 +201,13 @@ if !has('ide')
 	Plug 'chriskempson/base16-vim'
 
 	Plug 'wellle/context.vim'
+
+	Plug 'nvim-lua/plenary.nvim'
+
+	Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+
+	Plug 'Olical/conjure'
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 	call plug#end()
 
