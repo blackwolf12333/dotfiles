@@ -1,6 +1,8 @@
 [user]
 	name = Peter Maatman
 	email = blackwolf12333@gmail.com
+[column]
+	ui = auto
 [color]
 	ui = auto
 [core]
@@ -15,7 +17,7 @@
 	fixup = commit --fixup
 	amend = commit --amend
 	cp = cherry-pick 
-	p = push --force-with-lease
+	fp = push --force-with-lease=HEAD
 	wip = commit -a -m "wip"
 	unwip = reset HEAD~1
 [commit]
@@ -28,3 +30,6 @@
 	sort = version:refname
 [branch]
 	sort = -committerdate
+[diff]
+	external = difft
+	algorithm = histogram
