@@ -167,6 +167,8 @@ if !has('ide')
 
 	nmap <leader>a <Plug>(coc-codelens-action)
 
+	nmap <localleader>rt :ConjureCljRunCurrentNsTests<CR>
+
 	call plug#begin('~/.local/share/nvim/plugged')
 
 	Plug 'itchyny/lightline.vim'
@@ -208,6 +210,7 @@ if !has('ide')
 
 	Plug 'Olical/conjure'
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+	Plug 'gpanders/nvim-parinfer'
 
 	call plug#end()
 
