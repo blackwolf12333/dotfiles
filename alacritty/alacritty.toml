@@ -1,6 +1,6 @@
 [terminal.shell]
-args = ["--login", "-C tmux new-session -A"]
 program = "/bin/fish"
+args = ["-l", "-c", "zellij"]
 
 [window]
 decorations = "none"
