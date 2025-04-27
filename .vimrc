@@ -211,9 +211,13 @@ if !has('ide')
 	Plug 'Olical/conjure'
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 	Plug 'gpanders/nvim-parinfer'
+	Plug 'luochen1990/rainbow'
+	Plug 'guns/vim-sexp'
+	Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 	call plug#end()
 
+	let g:rainbow_active = 1
 	let g:lightline = {
 		\ 'colorscheme': 'base16_atelier_dune',
 		\ }
