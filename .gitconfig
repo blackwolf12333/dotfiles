@@ -20,6 +20,8 @@
 	fp = push --force-with-lease=HEAD
 	wip = commit -a -m "wip"
 	unwip = reset HEAD~1
+	stauts = status
+	satuts = status
 [commit]
 	verbose = true
 [push]
