@@ -28,6 +28,7 @@
 	autoSetupRemote = true
 [rebase]
 	autoSquash = true
+	updateRefs = true
 [tag]
 	sort = version:refname
 [branch]
